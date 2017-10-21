@@ -19,12 +19,14 @@ SRC = main.c \
 	  ft_fractal_julya.c \
 	  ft_fractal_burning_ship.c \
 	  ft_fractals_key_hook.c \
+	  ft_output_functions.c \
 	  
 OBJ = main.o \
-	  ft_fractal_mandelbrot.o \
-	  ft_fractal_julya.o \
-	  ft_fractal_burning_ship.o \
-	  ft_fractals_key_hook.o \
+	  ft_mandelbrot.o \
+	  ft_julya.o \
+	  ft_burning_ship.o \
+	  ft_key_hook.o \
+	  ft_output_functions.o \
 	  
 HEADER = fractol.h
 

@@ -12,34 +12,6 @@
 
 #include "fractol.h"
 
-void	ft_standart_burning_ship(t_d *d)
-{
-	d->z = 250;
-	d->i_max = 20;
-	d->m_x = 0;
-	d->m_y = 0;
-	d->move_x = WIDTH / 2;
-	d->move_y = HEIGHT / 2;
-	ft_write_mandelbrot(d);
-	ft_fractal_burning_ship(d);
-}
-
-void	ft_fractal_burning_ship(t_d *d)
-{
-	ft_write_mandelbrot(d);
-	d->y = 0;
-	while (d->y < HEIGHT)
-	{
-		d->x = 0;
-		while (d->x < WIDTH)
-		{
-			ft_burning_ship_count(d);
-			d->x++;
-		}
-		d->y++;
-	}
-}
-
 void	ft_burning_ship_count(t_d *d)
 {
 	d->p_r = (d->x - d->move_x) / d->z + d->m_x;
@@ -59,4 +31,32 @@ void	ft_burning_ship_count(t_d *d)
 		ft_put_pixel(d, 0x000000);
 	else
 		ft_put_pixel(d, 0xcc0033 + d->color * d->i);
+}
+
+void	ft_fractal_burning_ship(t_d *d)
+{
+	ft_print_controls(d);
+	d->y = 0;
+	while (d->y < HEIGHT)
+	{
+		d->x = 0;
+		while (d->x < WIDTH)
+		{
+			ft_burning_ship_count(d);
+			d->x++;
+		}
+		d->y++;
+	}
+}
+
+void	ft_init_burning_ship(t_d *d)
+{
+	d->z = 250;
+	d->i_max = 20;
+	d->m_x = 0;
+	d->m_y = 0;
+	d->move_x = WIDTH / 2;
+	d->move_y = HEIGHT / 2;
+	ft_print_controls(d);
+	ft_fractal_burning_ship(d);
 }

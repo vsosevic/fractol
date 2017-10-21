@@ -12,34 +12,22 @@
 
 #include "fractol.h"
 
-int		ft_valid(int argc, char *argv)
+void	ft_selected_fractol(t_d *d, char *argv)
 {
-	if (argc != 2 || (argv[0] != 'F' && argv[0] != 'S' && argv[0] != 'T'))
-	{
-		write(1, "Put letter F for fractal Mandelbrot\n", 36);
-		write(1, "Put letter S for fractal Julia\n", 31);
-		write(1, "Put letter T for fractal BurningShip\n", 37);
-		return (0);
-	}
-	return (1);
-}
-
-void	ft_which_fractol_is(t_d *d, char *argv)
-{
-	if (argv[0] == 'F')
+	if (argv[0] == 'M')
 	{
 		d->which_fractol = 1;
-		ft_standart_mandelbrot(d);
+		ft_init_mandelbrot(d);
 	}
-	if (argv[0] == 'S')
+	if (argv[0] == 'J')
 	{
 		d->which_fractol = 2;
-		ft_standart_julya(d);
+		ft_init_julya(d);
 	}
-	if (argv[0] == 'T')
+	if (argv[0] == 'B')
 	{
 		d->which_fractol = 3;
-		ft_standart_burning_ship(d);
+		ft_init_burning_ship(d);
 	}
 	ft_action(d);
 }
@@ -59,13 +47,18 @@ int		main(int argc, char **argv)
 	t_d *d;
 
 	d = (t_d*)malloc(sizeof(t_d));
-	if (ft_valid(argc, argv[1]) == 0)
+	if (argc != 2 || 
+		(argv[1][0] != 'M' && argv[1][0] != 'J' && argv[1][0] != 'B'))
+	{
+		ft_putstr("Usage: \n'./fractol M' - Mandelbrot\n");
+		ft_putstr("'./fractol J' - Julia\n'./fractol B' - BurningShip\n");
 		return (0);
+	}
 	d->mlx = mlx_init();
 	d->win = mlx_new_window(d->mlx, WIDTH, HEIGHT, "FRACTOL");
 	d->image = mlx_new_image(d->mlx, WIDTH, HEIGHT);
 	d->image_info = mlx_get_data_addr(d->image, &d->bpp, &d->s, &d->e);
-	ft_which_fractol_is(d, argv[1]);
+	ft_selected_fractol(d, argv[1]);
 	mlx_hook(d->win, 6, 0, mouse_hook, d);
 	mlx_hook(d->win, 2, 0, ft_key_hook_m, d);
 	mlx_mouse_hook(d->win, ft_mouse_hook_m, d);
