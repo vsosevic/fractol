@@ -15,10 +15,10 @@ NAME = fractol
 FLAG = -Wall -Werror -Wextra -lmlx -framework OpenGL -framework AppKit
 
 SRC = main.c \
-	  ft_fractal_mandelbrot.c \
-	  ft_fractal_julya.c \
-	  ft_fractal_burning_ship.c \
-	  ft_fractals_key_hook.c \
+	  ft_mandelbrot.c \
+	  ft_julya.c \
+	  ft_burning_ship.c \
+	  ft_key_hook.c \
 	  ft_output_functions.c \
 	  
 OBJ = main.o \

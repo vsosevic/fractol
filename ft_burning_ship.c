@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fractal_burning_ship.c                          :+:      :+:    :+:   */
+/*   ft_burning_ship_fractal.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsosevic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -33,7 +33,7 @@ void	ft_burning_ship_count(t_d *d)
 		ft_put_pixel(d, 0xcc0033 + d->color * d->i);
 }
 
-void	ft_fractal_burning_ship(t_d *d)
+void	ft_burning_ship_fractal(t_d *d)
 {
 	ft_print_controls(d);
 	d->y = 0;
@@ -49,7 +49,7 @@ void	ft_fractal_burning_ship(t_d *d)
 	}
 }
 
-void	ft_init_burning_ship(t_d *d)
+void	ft_burning_ship_init(t_d *d)
 {
 	d->z = 250;
 	d->i_max = 20;
@@ -58,5 +58,5 @@ void	ft_init_burning_ship(t_d *d)
 	d->move_x = WIDTH / 2;
 	d->move_y = HEIGHT / 2;
 	ft_print_controls(d);
-	ft_fractal_burning_ship(d);
+	ft_burning_ship_fractal(d);
 }

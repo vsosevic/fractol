@@ -12,34 +12,40 @@
 
 #include "fractol.h"
 
+void	ft_action(t_d *d)
+{
+	if (d->selected_fractol == 1)
+	{
+		ft_mandelbrot_fractal(d);
+	}
+	else if (d->selected_fractol == 2)
+	{
+		ft_julya_fractal(d);
+	}
+	else if (d->selected_fractol == 3)
+	{
+		ft_burning_ship_fractal(d);
+	}
+}
+
 void	ft_selected_fractol(t_d *d, char *argv)
 {
 	if (argv[0] == 'M')
 	{
-		d->which_fractol = 1;
-		ft_init_mandelbrot(d);
+		d->selected_fractol = 1;
+		ft_mandelbrot_init(d);
 	}
-	if (argv[0] == 'J')
+	else if (argv[0] == 'J')
 	{
-		d->which_fractol = 2;
-		ft_init_julya(d);
+		d->selected_fractol = 2;
+		ft_julya_init(d);
 	}
-	if (argv[0] == 'B')
+	else if (argv[0] == 'B')
 	{
-		d->which_fractol = 3;
-		ft_init_burning_ship(d);
+		d->selected_fractol = 3;
+		ft_burning_ship_init(d);
 	}
 	ft_action(d);
-}
-
-void	ft_action(t_d *d)
-{
-	if (d->which_fractol == 1)
-		ft_fractal_mandelbrot(d);
-	if (d->which_fractol == 2)
-		ft_fractal_julya(d);
-	if (d->which_fractol == 3)
-		ft_fractal_burning_ship(d);
 }
 
 int		main(int argc, char **argv)

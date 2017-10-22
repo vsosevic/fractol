@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fractal_mandelbrot.c                            :+:      :+:    :+:   */
+/*   ft_mandelbrot_fractal.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsosevic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,36 +11,6 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void	ft_init_mandelbrot(t_d *d)
-{
-	d->z = 270;
-	d->i_max = 30;
-	d->i = 0;
-	d->m_x = -0.46;
-	d->m_y = 0;
-	d->move_x = WIDTH / 2;
-	d->move_y = HEIGHT / 2;
-	d->color = 1;
-	ft_print_controls(d);
-	ft_fractal_mandelbrot(d);
-}
-
-void	ft_fractal_mandelbrot(t_d *d)
-{
-	ft_print_controls(d);
-	d->y = 0;
-	while (d->y < HEIGHT)
-	{
-		d->x = 0;
-		while (d->x < WIDTH)
-		{
-			ft_mandelbrot_count(d);
-			d->x++;
-		}
-		d->y++;
-	}
-}
 
 void	ft_mandelbrot_count(t_d *d)
 {
@@ -61,4 +31,34 @@ void	ft_mandelbrot_count(t_d *d)
 		ft_put_pixel(d, 0xCC0033);
 	else
 		ft_put_pixel(d, 0x000000 + d->color * d->i);
+}
+
+void	ft_mandelbrot_fractal(t_d *d)
+{
+	ft_print_controls(d);
+	d->y = 0;
+	while (d->y < HEIGHT)
+	{
+		d->x = 0;
+		while (d->x < WIDTH)
+		{
+			ft_mandelbrot_count(d);
+			d->x++;
+		}
+		d->y++;
+	}
+}
+
+void	ft_mandelbrot_init(t_d *d)
+{
+	d->z = 270;
+	d->i_max = 30;
+	d->i = 0;
+	d->m_x = -0.46;
+	d->m_y = 0;
+	d->move_x = WIDTH / 2;
+	d->move_y = HEIGHT / 2;
+	d->color = 1;
+	ft_print_controls(d);
+	ft_mandelbrot_fractal(d);
 }

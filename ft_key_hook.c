@@ -44,7 +44,7 @@ int		ft_key_hook_f(int keycode, t_d *d)
 	if (keycode == 19)
 		d->color += 1000;
 	if (keycode == 48)
-		ft_init_mandelbrot(d);
+		ft_mandelbrot_init(d);
 	return (0);
 }
 
