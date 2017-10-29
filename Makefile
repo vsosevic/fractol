@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vsosevic <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: askochul <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/10/21 18:05:42 by vsosevic          #+#    #+#              #
-#    Updated: 2017/10/21 18:06:02 by vsosevic         ###   ########.fr        #
+#    Created: 2017/04/05 14:06:41 by askochul          #+#    #+#              #
+#    Updated: 2017/10/22 17:10:45 by askochul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,18 +15,22 @@ NAME = fractol
 FLAG = -Wall -Werror -Wextra -lmlx -framework OpenGL -framework AppKit
 
 SRC = main.c \
-	  ft_mandelbrot.c \
-	  ft_julya.c \
-	  ft_burning_ship.c \
-	  ft_key_hook.c \
-	  ft_output_functions.c \
+	  fractol_selection_draw.c \
+	  draw_julya_fractal.c \
+	  draw_burning_ship_fractal.c \
+	  actions_keys.c \
+	  actions_mouse.c \
+	  init_fractals.c
 	  
 OBJ = main.o \
-	  ft_mandelbrot.o \
-	  ft_julya.o \
-	  ft_burning_ship.o \
-	  ft_key_hook.o \
-	  ft_output_functions.o \
+	  fractol_selection_draw.o \
+	  draw_mandelbrot_fractal.o \
+	  draw_julya_fractal.o \
+	  draw_burning_ship_fractal.o \
+	  actions_keys.o \
+	  actions_mouse.o \
+	  init_fractals.o
+	  
 	  
 HEADER = fractol.h
 

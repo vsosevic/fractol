@@ -5,67 +5,71 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsosevic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/21 18:06:13 by vsosevic          #+#    #+#             */
-/*   Updated: 2017/10/21 18:06:18 by vsosevic         ###   ########.fr       */
+/*   Created: 2017/10/29 19:16:30 by vsosevic          #+#    #+#             */
+/*   Updated: 2017/10/29 19:16:32 by vsosevic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FRACTAL_H
+# define FRACTAL_H
+# define W 1000
+# define H 1000
 # include <stdlib.h>
+# include "pthread.h"
 # include "libft/libft.h"
 # include "mlx.h"
 # include "math.h"
-# include "pthread.h"
-# define WIDTH 1000
-# define HEIGHT 1000
 
-typedef struct	s_d
+
+typedef struct	s_fractal
 {
-	void		*mlx;
-	void		*win;
-	void		*image;
-	char		*image_info;
-	int			selected_fractol;
-	int			bpp;
+	double		move_mouse_x;
+	double		move_mouse_y;
+	double		c;
+	int 		i;
+	double 		temp_y;
+	int 		change_x;
+	int 		change_y;
+	double		go_x;
+	double		go_y;
+	double		color;
+	double		point_real;
+	double		point_imagine;
+	double		p_new_real;
+	double		p_new_imagine;
+	double		p_old_real;
+	double		p_old_imagine;
+	int 		max_iteration;
+	double		z;
+	double		x2;
+	double		y2;
+	double		x;
+	double		y;
+	int			b;
 	int			s;
 	int			e;
-	double		x;
-	double		x1;
-	double		y;
-	double		y1;
-	double		z;
-	double		c;
-	int			i;
-	int			i_max;
-	double		tmp_y;
-	double		p_r;
-	double		p_i;
-	double		pn_r;
-	double		pn_i;
-	double		po_r;
-	double		po_i;
-	int			move_x;
-	int			move_y;
-	double		m_x;
-	double		m_y;
-	double		x_mouse;
-	double		y_mouse;
-	double		color;
+	void		*init_mlx;
+	void		*window;
+	void		*new_image;
+	char		*image_arr;
+	int 		choose_fractol;
+	int         flag;
+}				t_fractal;
 
-}				t_d;
-
-int				mouse_hook(int x, int y, t_d *d);
-void			ft_selected_fractol(t_d *d, char *argv);
-void			ft_mandelbrot_init(t_d *d);
-void			ft_burning_ship_init(t_d *d);
-void			ft_julya_init(t_d *d);
-int				ft_key_hook_m(int keycode, t_d *d);
-int				ft_key_hook_f(int keycode, t_d *d);
-int				ft_mouse_hook_m(int mousecode, int x, int y, t_d *d);
-int				ft_print_controls(t_d *d);
-int				ft_write_burning_ship(t_d *d);
-void			ft_put_pixel(t_d *d, int hex_value);
-void			ft_action(t_d *d);
+int		main(int argc, char **argv);
+void	create_window(t_fractal *f, char **argv);
+void	fractol_selection(char *argv, t_fractal *f);
+void	init_mandelbrot_fractal(t_fractal *f);
+void	init_julya_fractal(t_fractal *f);
+void	init_burningship_fractal(t_fractal *f);
+void	mandelbrot(t_fractal *f);
+void	julya(t_fractal *f);
+void	burning_ship(t_fractal *f);
+void	draw_pixels(t_fractal *f, int hex_value);
+void	redraw(t_fractal *f);
+int		keys(int keycode, t_fractal *f);
+int		keys2(int keycode, t_fractal *f);
+int		keys_for_mouse(int x, int y, t_fractal *f);
+int		keys_for_mouse2(int button, int x, int y, t_fractal *f);
 
 #endif

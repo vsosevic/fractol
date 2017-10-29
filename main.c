@@ -5,68 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vsosevic <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/21 18:10:43 by vsosevic          #+#    #+#             */
-/*   Updated: 2017/10/21 18:10:47 by vsosevic         ###   ########.fr       */
+/*   Created: 2017/10/29 19:15:14 by vsosevic          #+#    #+#             */
+/*   Updated: 2017/10/29 19:15:16 by vsosevic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_action(t_d *d)
+void	create_window(t_fractal *f, char **argv)
 {
-	if (d->selected_fractol == 1)
-	{
-		ft_mandelbrot_fractal(d);
-	}
-	else if (d->selected_fractol == 2)
-	{
-		ft_julya_fractal(d);
-	}
-	else if (d->selected_fractol == 3)
-	{
-		ft_burning_ship_fractal(d);
-	}
-}
-
-void	ft_selected_fractol(t_d *d, char *argv)
-{
-	if (argv[0] == 'M')
-	{
-		d->selected_fractol = 1;
-		ft_mandelbrot_init(d);
-	}
-	else if (argv[0] == 'J')
-	{
-		d->selected_fractol = 2;
-		ft_julya_init(d);
-	}
-	else if (argv[0] == 'B')
-	{
-		d->selected_fractol = 3;
-		ft_burning_ship_init(d);
-	}
-	ft_action(d);
+	f->init_mlx = mlx_init();
+	f->window = mlx_new_window(f->init_mlx, W, H, "fractal");
+	f->new_image = mlx_new_image(f->init_mlx, W, H);
+	f->image_arr = mlx_get_data_addr(f->new_image, &f->b, &f->s, &f->e);
+	fractol_selection(argv[1], f);
+	mlx_hook(f->window, 2, 0, keys, f);
+	mlx_hook(f->window, 6, 0, keys_for_mouse, f);
+	mlx_mouse_hook(f->window, keys_for_mouse2, f);
+	mlx_loop(f->init_mlx);
 }
 
 int		main(int argc, char **argv)
 {
-	t_d *d;
+	t_fractal *f;
 
-	d = (t_d*)malloc(sizeof(t_d));
-	if (argc != 2 || 
+	f = (t_fractal*)malloc(sizeof(t_fractal));
+	if (argc != 2 ||
 		(argv[1][0] != 'M' && argv[1][0] != 'J' && argv[1][0] != 'B'))
 	{
 		ft_putstr("Usage: \n'./fractol M' - Mandelbrot\n");
 		ft_putstr("'./fractol J' - Julia\n'./fractol B' - BurningShip\n");
 		return (0);
 	}
-	d->mlx = mlx_init();
-	d->win = mlx_new_window(d->mlx, WIDTH, HEIGHT, "FRACTOL");
-	d->image = mlx_new_image(d->mlx, WIDTH, HEIGHT);
-	d->image_info = mlx_get_data_addr(d->image, &d->bpp, &d->s, &d->e);
-	ft_selected_fractol(d, argv[1]);
-	mlx_hook(d->win, 6, 0, mouse_hook, d);
-	mlx_hook(d->win, 2, 0, ft_key_hook_m, d);
-	mlx_mouse_hook(d->win, ft_mouse_hook_m, d);
-	mlx_loop(d->mlx);
+	create_window(f, argv);
+	return (0);
 }
